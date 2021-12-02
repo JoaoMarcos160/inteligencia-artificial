@@ -4,13 +4,60 @@
 
 footer {
   color: var(--secondary);
-  text-align: center;
   background-color: var(--primary);
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  margin: 5px 0px;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
 }
 
-header {
+header,
+footer {
+  display: flex;
+  flex-flow: row;
   text-align: center;
+  justify-content: space-between;
+}
+
+.divs {
+  display: flex;
+  margin: 5px;
+}
+
+.div-2 {
+  max-width: 50vh;
+  display: flex;
+  flex-direction: column;
+  line-height: 1rem;
+  justify-content: center;
+}
+
+.link {
+  margin: 0.2rem;
+  padding: 0.2rem;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: var(--secondary);
+}
+
+.link > label {
+  color: var(--primary);
+}
+
+.synaptic {
+  color: var(--secondary);
+}
+
+.back {
+  margin: auto 5px;
+  align-items: flex-start;
+  border: solid red 1px;
+}
+
+.angular {
+  color: #dc0031;
 }

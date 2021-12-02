@@ -1,9 +1,40 @@
 <header>
+  <fa-icon class="back" [icon]="faAngleLeft"></fa-icon>
   <h2>Inteligência Artificial</h2>
+  <fa-icon class="back" [icon]="faAngular"></fa-icon>
 </header>
 <section>
   <router-outlet></router-outlet>
 </section>
 <footer>
-  <h3>Desenvolvido por João Marcos - 2021</h3>
+  <div class="divs">
+    <a
+      class="link"
+      href="https://angular.io"
+      target="_blank"
+    >
+      <fa-icon id="linkAngular" class="fa-3x angular" [icon]="faAngular"> </fa-icon>
+      <label for="linkAngular">Angular</label>
+    </a>
+  </div>
+  <div class="divs div-2">
+    <h5>Desenvolvido por João Marcos - 2021</h5>
+    <small>
+      Implementando conhecimentos de inteligência artificial usando a biblioteca
+      <a class="synaptic" href="https://caza.la/synaptic/#/" target="_blank">
+        synaptic.js
+      </a>
+      para criação das redes neurais
+    </small>
+  </div>
+  <div class="divs">
+    <a
+      class="link"
+      href="https://github.com/JoaoMarcos160/inteligencia-artificial"
+      target="_blank"
+    >
+      <fa-icon id="linkGit" class="fa-3x" [icon]="faGithub"> </fa-icon>
+      <label for="linkGit">GitHub</label>
+    </a>
+  </div>
 </footer>

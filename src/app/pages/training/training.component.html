@@ -3,11 +3,9 @@
 
   <br />
   <br />
-  <label for="loading">Training progress:</label>
+  <label for="loading">Progresso do treinamento:</label>
   <progress id="loading" [value]="loadingTraining" max="100"></progress>
   {{ loadingTraining }} %
-
-  <h4 *ngIf="loadingTraining > 0 && loadingTraining < 100">Treinando...</h4>
 
   <h4>Desenhe um número</h4>
   <table>

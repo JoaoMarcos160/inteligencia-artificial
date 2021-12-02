@@ -1,0 +1,41 @@
+<button (click)="toTrain()">Treinar</button>
+
+<br />
+<br />
+<label for="loading">Training progress:</label>
+<progress id="loading" [value]="loadingTraining" max="100"></progress>
+{{ loadingTraining }} %
+
+<h4 *ngIf="loadingTraining > 0 && loadingTraining < 100">Treinando...</h4>
+
+<h4>Desenhe um número</h4>
+<table>
+  <caption>
+    Resultado
+  </caption>
+  <tr>
+    <th
+      *ngFor="let col of [].constructor(configs.numberOfColumns); let i = index"
+      scope="col"
+    >
+      {{ i }}
+    </th>
+  </tr>
+  <ng-container *ngFor="let value of input; let i = index">
+    <tr *ngIf="i % configs.numberOfColumns == 0">
+      <td
+        *ngFor="
+          let col of [].constructor(configs.numberOfColumns);
+          let i2 = index
+        "
+        (click)="handleClick(i + i2)"
+        [ngClass]="{ 'back-black': input[i + i2] == 1 }"
+      ></td>
+    </tr>
+  </ng-container>
+</table>
+
+<br />
+<button (click)="toVerify()">Verificar</button>
+
+<h2>{{ foundNumber }}</h2>

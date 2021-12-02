@@ -1,43 +1,48 @@
-<button (click)="toTrain()">Treinar</button>
+<div class="container">
+  <button (click)="toTrain()">Treinar</button>
 
-<br />
-<br />
-<label for="loading">Training progress:</label>
-<progress id="loading" [value]="loadingTraining" max="100"></progress>
-{{ loadingTraining }} %
+  <br />
+  <br />
+  <label for="loading">Training progress:</label>
+  <progress id="loading" [value]="loadingTraining" max="100"></progress>
+  {{ loadingTraining }} %
 
-<h4 *ngIf="loadingTraining > 0 && loadingTraining < 100">Treinando...</h4>
+  <h4 *ngIf="loadingTraining > 0 && loadingTraining < 100">Treinando...</h4>
 
-<h4>Desenhe um número</h4>
-<table>
-  <caption>
-    Resultado
-  </caption>
-  <tr>
-    <th scope="col"></th>
-    <th
-      *ngFor="let col of [].constructor(configs.numberOfColumns); let i = index"
-      scope="col"
-    >
-      {{ i }}
-    </th>
-  </tr>
-  <ng-container *ngFor="let value of input; let i = index">
-    <tr *ngIf="i % configs.numberOfColumns == 0">
-      <td>{{ i * (1 / configs.numberOfColumns) }}</td>
-      <td
+  <h4>Desenhe um número</h4>
+  <table>
+    <caption>
+      Resultado
+    </caption>
+    <tr>
+      <th scope="col"></th>
+      <th
         *ngFor="
           let col of [].constructor(configs.numberOfColumns);
-          let i2 = index
+          let i = index
         "
-        (click)="handleClick(i + i2)"
-        [ngClass]="{ 'back-black': input[i + i2] == 1 }"
-      ></td>
+        scope="col"
+      >
+        {{ i }}
+      </th>
     </tr>
-  </ng-container>
-</table>
+    <ng-container *ngFor="let value of input; let i = index">
+      <tr *ngIf="i % configs.numberOfColumns == 0">
+        <td>{{ i * (1 / configs.numberOfColumns) }}</td>
+        <td
+          *ngFor="
+            let col of [].constructor(configs.numberOfColumns);
+            let i2 = index
+          "
+          (click)="handleClick(i + i2)"
+          [ngClass]="{ 'back-black': input[i + i2] == 1 }"
+        ></td>
+      </tr>
+    </ng-container>
+  </table>
 
-<br />
-<button (click)="toVerify()">Verificar</button>
+  <br />
+  <button (click)="toVerify()">Verificar</button>
 
-<h2>{{ foundNumber }}</h2>
+  <h2>{{ foundNumber }}</h2>
+</div>

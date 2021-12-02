@@ -81,6 +81,13 @@ export class TrainingComponent implements OnInit {
       [1, 0, 0],
       [1, 0, 0],
     ];
+    const numberOne4 = [
+      [0, 1, 0],
+      [1, 1, 0],
+      [0, 1, 0],
+      [0, 1, 0],
+      [0, 1, 0],
+    ];
     const numberTwo = [
       [1, 1, 1],
       [0, 0, 1],
@@ -156,6 +163,7 @@ export class TrainingComponent implements OnInit {
       { number: 1, representation: numberOne1 },
       { number: 1, representation: numberOne2 },
       { number: 1, representation: numberOne3 },
+      { number: 1, representation: numberOne4 },
       { number: 2, representation: numberTwo },
       { number: 3, representation: numberThree },
       { number: 4, representation: numberFor },

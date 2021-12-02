@@ -8,6 +8,12 @@ td {
   padding: 1rem 1rem;
 }
 
+td:first-child {
+  padding: 2px;
+  text-align: center;
+  font-weight: bold;
+}
+
 .back-black {
   background-color: black;
 }

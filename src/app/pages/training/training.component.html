@@ -14,6 +14,7 @@
     Resultado
   </caption>
   <tr>
+    <th scope="col"></th>
     <th
       *ngFor="let col of [].constructor(configs.numberOfColumns); let i = index"
       scope="col"
@@ -23,6 +24,7 @@
   </tr>
   <ng-container *ngFor="let value of input; let i = index">
     <tr *ngIf="i % configs.numberOfColumns == 0">
+      <td>{{ i * (1 / configs.numberOfColumns) }}</td>
       <td
         *ngFor="
           let col of [].constructor(configs.numberOfColumns);

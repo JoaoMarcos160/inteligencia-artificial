@@ -21,3 +21,12 @@ td:first-child {
 .container {
   margin: 0.4rem;
 }
+
+.configs {
+  display: flex;
+  flex-direction: column;
+}
+
+.configs > input {
+  width: fit-content;
+}

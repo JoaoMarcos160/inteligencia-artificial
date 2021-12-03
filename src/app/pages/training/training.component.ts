@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Layer, Network } from 'synaptic';
 
 @Component({
@@ -6,22 +12,32 @@ import { Layer, Network } from 'synaptic';
   templateUrl: './training.component.html',
   styleUrls: ['./training.component.scss'],
 })
-export class TrainingComponent implements OnInit {
+export class TrainingComponent implements OnInit, AfterViewInit {
+  @ViewChild('numberOfColumns')
+  numberOfColumns: ElementRef<HTMLInputElement>;
+
+  @ViewChild('numberOfRows')
+  numberOfRows: ElementRef<HTMLInputElement>;
+
+  @ViewChild('loops')
+  loops: ElementRef<HTMLInputElement>;
+
+  @ViewChild('learningRate')
+  learningRate: ElementRef<HTMLInputElement>;
+
   public configs = {
     numberOfColumns: 3,
     numberOfRows: 5,
+    loops: 10000,
+    learningRate: 0.2,
   };
-
-  public loops = 9000;
-
-  public learningRate = 0.3;
 
   public loadingTraining = 0;
 
   public arrayForTraining: { number: number; representation: number[][] }[] =
     [];
 
-  public foundNumber: number | null = null;
+  public foundNumbers: number[] = [];
 
   private _network: Network = new Network();
 
@@ -87,6 +103,13 @@ export class TrainingComponent implements OnInit {
       [0, 1, 0],
       [0, 1, 0],
       [0, 1, 0],
+    ];
+    const numberOne5 = [
+      [0, 0, 1],
+      [0, 0, 1],
+      [0, 0, 1],
+      [0, 0, 1],
+      [0, 0, 1],
     ];
     const numberTwo = [
       [1, 1, 1],
@@ -164,6 +187,7 @@ export class TrainingComponent implements OnInit {
       { number: 1, representation: numberOne2 },
       { number: 1, representation: numberOne3 },
       { number: 1, representation: numberOne4 },
+      { number: 1, representation: numberOne5 },
       { number: 2, representation: numberTwo },
       { number: 3, representation: numberThree },
       { number: 4, representation: numberFor },
@@ -177,29 +201,54 @@ export class TrainingComponent implements OnInit {
     ];
   }
 
-  toTrain() {
-    let index = 0;
-    while (index < this.loops) {
-      for (const element of this.arrayForTraining) {
-        let array: number[] = [];
-        for (const element2 of element.representation) {
-          array = [...array, ...element2];
-        }
-        const result: number[] = [];
-        for (let i = 0; result.length < 10; i++) {
-          if (i === element.number) {
-            result.push(1);
-          } else {
-            result.push(0);
-          }
-        }
+  ngAfterViewInit(): void {
+    this.addListenersInputs();
+  }
 
-        this._network.activate(array);
-        this._network.propagate(this.learningRate, result);
-      }
-      index++;
-      this.loadingTraining = Math.round((index / this.loops) * 100);
+  addListenersInputs() {
+    this.numberOfColumns.nativeElement.addEventListener('change', () =>
+      this.handleInputConfigs('numberOfColumns')
+    );
+    this.numberOfRows.nativeElement.addEventListener('change', () =>
+      this.handleInputConfigs('numberOfRows')
+    );
+    this.loops.nativeElement.addEventListener('change', () =>
+      this.handleInputConfigs('loops')
+    );
+    this.learningRate.nativeElement.addEventListener('change', () =>
+      this.handleInputConfigs('learningRate')
+    );
+  }
+
+  toTrain(): void {
+    for (let index = 0; index < this.configs.loops; index++) {
+      setTimeout(() => {
+        for (const element of this.arrayForTraining) {
+          const arrayActivation: number[] = this.toPlainArray(
+            element.representation
+          );
+          const result: number[] = [];
+          for (let i = 0; result.length < 10; i++) {
+            if (i === element.number) {
+              result.push(1);
+            } else {
+              result.push(0);
+            }
+          }
+          this._network.activate(arrayActivation);
+          this._network.propagate(this.configs.learningRate, result);
+        }
+        this.loadingTraining = Math.round((index / this.configs.loops) * 100);
+      }, 0);
     }
+  }
+
+  toPlainArray(array: number[][]): number[] {
+    let arrayPlanify: number[] = [];
+    for (const element of array) {
+      arrayPlanify.push(...element);
+    }
+    return arrayPlanify;
   }
 
   handleClick(index: number) {
@@ -208,10 +257,67 @@ export class TrainingComponent implements OnInit {
 
   toVerify() {
     const result = this._network.activate([...this.input]);
+    const resultCopy = [...result];
+    const orderedResult: number[] = [];
 
-    const closer = result.reduce((prev, curr) => {
-      return Math.abs(curr - 1) < Math.abs(prev - 1) ? curr : prev;
-    });
-    this.foundNumber = result.findIndex((element) => element === closer);
+    let length = result.length;
+    while (length > 0) {
+      const closer = result.reduce((prev, curr) => {
+        return Math.abs(curr - 1) < Math.abs(prev - 1) ? curr : prev;
+      });
+      const index = resultCopy.findIndex(
+        (element) => Math.abs(element - closer) < 0.01
+      );
+      if (index > -1) {
+        orderedResult.push(index);
+        result.splice(index, 1);
+      }
+      console.log(index);
+      length--;
+    }
+    console.log(orderedResult);
+
+    this.foundNumbers = orderedResult;
+  }
+
+  handleInputConfigs(id: string) {
+    switch (id) {
+      case 'numberOfColumns':
+        this.configs.numberOfColumns = Math.max(
+          0,
+          Math.min(50, Math.ceil(+this.numberOfColumns.nativeElement.value))
+        );
+        this.numberOfColumns.nativeElement.value =
+          this.configs.numberOfColumns.toString();
+        break;
+      case 'numberOfRows':
+        this.configs.numberOfRows = Math.max(
+          0,
+          Math.min(50, Math.ceil(+this.numberOfRows.nativeElement.value))
+        );
+        this.numberOfRows.nativeElement.value =
+          this.configs.numberOfRows.toString();
+        break;
+      case 'loops':
+        this.configs.loops = Math.max(
+          0,
+          Math.min(100000, Math.round(+this.loops.nativeElement.value))
+        );
+        this.loops.nativeElement.value = this.configs.loops.toString();
+        break;
+      case 'learningRate':
+        this.configs.learningRate = Math.max(
+          0,
+          Math.min(1, parseFloat(this.learningRate.nativeElement.value))
+        );
+        this.learningRate.nativeElement.value =
+          this.configs.learningRate.toString();
+        break;
+
+      default:
+        console.error('not mapped in swicth!');
+        break;
+    }
+    //TODO: Falta ver uma maneira de gerar a grade para desenhas os numeros que respeite o digitado nos inputs
   }
 }

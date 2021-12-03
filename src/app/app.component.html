@@ -1,19 +1,20 @@
 <header>
-  <fa-icon class="back" [icon]="faAngleLeft"></fa-icon>
+  <fa-icon (click)="toBack()" class="back fa-lg" [icon]="faAngleLeft"></fa-icon>
   <h2>Inteligência Artificial</h2>
-  <fa-icon class="back" [icon]="faAngular"></fa-icon>
+  <fa-icon
+    (click)="toForward()"
+    class="back fa-lg"
+    [icon]="faAngleRight"
+  ></fa-icon>
 </header>
 <section>
   <router-outlet></router-outlet>
 </section>
 <footer>
   <div class="divs">
-    <a
-      class="link"
-      href="https://angular.io"
-      target="_blank"
-    >
-      <fa-icon id="linkAngular" class="fa-3x angular" [icon]="faAngular"> </fa-icon>
+    <a class="link" href="https://angular.io" target="_blank">
+      <fa-icon id="linkAngular" class="fa-3x angular" [icon]="faAngular">
+      </fa-icon>
       <label for="linkAngular">Angular</label>
     </a>
   </div>

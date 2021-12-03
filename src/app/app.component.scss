@@ -7,10 +7,12 @@ footer {
   background-color: var(--primary);
   padding-top: 0.2rem;
   padding-bottom: 0.2rem;
-  position: fixed;
+  position: relative;
   left: 0;
   bottom: 0;
   width: 100%;
+  height: min-content;
+  max-height: 10rem;
 }
 
 header,
@@ -35,7 +37,9 @@ footer {
 }
 
 .link {
-  margin: 0.2rem;
+  width: fit-content;
+  height: fit-content;
+  margin: auto;
   padding: 0.2rem;
   display: flex;
   flex-direction: column;
@@ -55,7 +59,10 @@ footer {
 .back {
   margin: auto 5px;
   align-items: flex-start;
-  border: solid red 1px;
+  border: var(--primary) 1px solid;
+  border-radius: 0.3rem;
+  padding: 0.5rem 0.8rem;
+  cursor: pointer;
 }
 
 .angular {

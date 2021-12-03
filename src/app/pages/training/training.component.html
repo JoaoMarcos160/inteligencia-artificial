@@ -1,9 +1,50 @@
 <div class="container">
+  <div class="configs">
+    <label for="numberOfColumns">Número de colunas</label>
+    <input
+      #numberOfColumns
+      id="numberOfColumns"
+      placeholder="3"
+      type="number"
+      min="0"
+    />
+
+    <label for="numberOfRows">Número de linhas</label>
+    <input
+      #numberOfRows
+      id="numberOfRows"
+      placeholder="5"
+      type="number"
+      min="0"
+    />
+
+    <label for="loops">Loops para aprendizado</label>
+    <input
+      #loops
+      id="loops"
+      placeholder="10000"
+      type="number"
+      [incremental]="250"
+      min="0"
+    />
+
+    <label for="learningRate">Taxa de aprendizado</label>
+    <input
+      #learningRate
+      id="learningRate"
+      placeholder="0.1"
+      type="number"
+      [incremental]="0.01"
+      min="0"
+    />
+  </div>
+  <br />
+
   <button (click)="toTrain()">Treinar</button>
 
   <br />
   <br />
-  <label for="loading">Progresso do treinamento:</label>
+  <label for="loading">Progresso do treinamento: &nbsp;</label>
   <progress id="loading" [value]="loadingTraining" max="100"></progress>
   {{ loadingTraining }} %
 
@@ -41,6 +82,12 @@
 
   <br />
   <button (click)="toVerify()">Verificar</button>
-
-  <h2>{{ foundNumber }}</h2>
+  <br />
+  <br />
+  Números encontrados (mais próximo 1º):
+  <ul>
+    <li *ngFor="let n of foundNumbers">
+      <strong> {{ n }}</strong>
+    </li>
+  </ul>
 </div>

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TrainingComponent } from './training.component';
+import { NumberRecognitionTrainingComponent } from './number-recognition-training.component';
 
 describe('TrainingComponent', () => {
-  let component: TrainingComponent;
-  let fixture: ComponentFixture<TrainingComponent>;
+  let component: NumberRecognitionTrainingComponent;
+  let fixture: ComponentFixture<NumberRecognitionTrainingComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TrainingComponent ]
+      declarations: [ NumberRecognitionTrainingComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TrainingComponent);
+    fixture = TestBed.createComponent(NumberRecognitionTrainingComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

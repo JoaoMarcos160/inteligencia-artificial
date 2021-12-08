@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
-  constructor() {}
+export class HomeComponent {
+  @Input('routes') routes: { name: string; route: string }[] = [];
 
-  ngOnInit(): void {}
+  constructor(private router: Router) {}
 }

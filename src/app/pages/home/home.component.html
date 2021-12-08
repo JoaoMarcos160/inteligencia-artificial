@@ -1,6 +1,8 @@
 <h1>Home</h1>
 <nav>
   <ul>
-    <li><a routerLink="/training">Treinamento</a></li>
+    <li *ngFor="let link of routes">
+      <a [routerLink]="'/' + link.route">{{ link.name }}</a>
+    </li>
   </ul>
 </nav>

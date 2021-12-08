@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
-import { TrainingComponent } from './pages/training/training.component';
+import { NumberRecognitionTrainingComponent } from './pages/number-recognition-training/number-recognition-training.component';
 
 const routes: Routes = [
   {
@@ -9,9 +9,10 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'training',
-    component: TrainingComponent,
+    path: 'number-recognition-training',
+    component: NumberRecognitionTrainingComponent,
   },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   {
     path: '**',
     redirectTo: 'home',
@@ -19,7 +20,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, {
+      useHash: true,
+      scrollPositionRestoration: 'enabled',
+    }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

@@ -8,22 +8,22 @@ import {
 import { Layer, Network } from 'synaptic';
 
 @Component({
-  selector: 'app-training',
-  templateUrl: './training.component.html',
-  styleUrls: ['./training.component.scss'],
+  selector: 'app-number-recognition-training',
+  templateUrl: './number-recognition-training.component.html',
+  styleUrls: ['./number-recognition-training.component.scss'],
 })
-export class TrainingComponent implements OnInit, AfterViewInit {
+export class NumberRecognitionTrainingComponent implements OnInit, AfterViewInit {
   @ViewChild('numberOfColumns')
-  numberOfColumns: ElementRef<HTMLInputElement>;
+  numberOfColumns!: ElementRef<HTMLInputElement>;
 
   @ViewChild('numberOfRows')
-  numberOfRows: ElementRef<HTMLInputElement>;
+  numberOfRows!: ElementRef<HTMLInputElement>;
 
   @ViewChild('loops')
-  loops: ElementRef<HTMLInputElement>;
+  loops!: ElementRef<HTMLInputElement>;
 
   @ViewChild('learningRate')
-  learningRate: ElementRef<HTMLInputElement>;
+  learningRate!: ElementRef<HTMLInputElement>;
 
   public configs = {
     numberOfColumns: 3,

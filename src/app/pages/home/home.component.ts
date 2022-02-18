@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,7 +7,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  @Input('routes') routes: { name: string; route: string }[] = [];
+  public routes: { name: string; route: string }[] = [
+    {
+      name: 'Treinar reconhecimento de números',
+      route: '/number-recognition-training'
+    }
+  ];
 
   constructor(private router: Router) {}
 }

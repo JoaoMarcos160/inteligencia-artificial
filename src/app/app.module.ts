@@ -8,9 +8,10 @@ import { NumberRecognitionTrainingComponent } from './pages/number-recognition-t
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, NumberRecognitionTrainingComponent],
+  declarations: [AppComponent, HomeComponent, NumberRecognitionTrainingComponent, NotFoundComponent],
   imports: [
     CommonModule,
     RouterModule,

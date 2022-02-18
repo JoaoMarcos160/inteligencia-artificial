@@ -12,7 +12,9 @@ import { Layer, Network } from 'synaptic';
   templateUrl: './number-recognition-training.component.html',
   styleUrls: ['./number-recognition-training.component.scss'],
 })
-export class NumberRecognitionTrainingComponent implements OnInit, AfterViewInit {
+export class NumberRecognitionTrainingComponent
+  implements OnInit, AfterViewInit
+{
   @ViewChild('numberOfColumns')
   numberOfColumns!: ElementRef<HTMLInputElement>;
 
@@ -262,6 +264,11 @@ export class NumberRecognitionTrainingComponent implements OnInit, AfterViewInit
 
     let length = result.length;
     while (length > 0) {
+      console.log('resultCopy');
+      console.log(resultCopy);
+      console.log('length');
+      console.log(length);
+
       const closer = result.reduce((prev, curr) => {
         return Math.abs(curr - 1) < Math.abs(prev - 1) ? curr : prev;
       });
@@ -272,9 +279,12 @@ export class NumberRecognitionTrainingComponent implements OnInit, AfterViewInit
         orderedResult.push(index);
         result.splice(index, 1);
       }
+      console.log('index');
       console.log(index);
       length--;
     }
+
+    console.log('orderedResult');
     console.log(orderedResult);
 
     this.foundNumbers = orderedResult;
